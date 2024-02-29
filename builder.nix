@@ -7,7 +7,6 @@
   extraElectronArgs ? "",
   discordPathSuffix ? "",
   overlayFinal ? null,
-  withOpenAsar ? false,
   mkPnpmPackage,
 }: let
   overlayFinalorSelf =
@@ -26,7 +25,7 @@
     };
 
     discord-plugged = pkgs.callPackage ./discord-plugged.nix {
-      inherit extraElectronArgs discordPathSuffix withOpenAsar;
+      inherit extraElectronArgs discordPathSuffix;
       inherit (overlayFinalorSelf) replugged;
       discord =
         if discord != null
