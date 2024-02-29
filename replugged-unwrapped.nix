@@ -9,15 +9,20 @@
   script = "bundle --production";
   distDir = "dist-bundle";
   installInPlace = true;
+
   patches = [
     ./patches/replugged-injector.patch
   ];
 
   buildPhase = ''
-    export NIX_EXPECTED_ASAR=$out
+    export NIX_EXPECTED_ASAR=$src
     runHook preBuild
     pnpm run bundle --production
     runHook postBuild
+  '';
+
+  postInstall = ''
+    cp /build/source/replugged.asar $out/
   '';
 
   meta = {

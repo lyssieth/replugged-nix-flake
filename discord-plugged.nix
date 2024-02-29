@@ -28,15 +28,10 @@ in
 
     postBuild =
       ''
-        ls -la "${replugged.out}"
-        echo "---"
-        ls -la "${replugged.unwrapped.out}"
-        exit 1
-
         mv $out/opt/Discord${discordPathSuffix}/resources/app.asar $out/opt/Discord${discordPathSuffix}/resources/app.orig.asar
 
         mkdir $out/opt/Discord${discordPathSuffix}/resources/app.asar
-        echo "require(\"/home/lys/.config/replugged/replugged.asar\")" > $out/opt/Discord${discordPathSuffix}/resources/app.asar/index.js
+        echo "require(\"${replugged.out}/replugged.asar\")" > $out/opt/Discord${discordPathSuffix}/resources/app.asar/index.js
         echo '{"main": "index.js", "name": "discord"}' > $out/opt/Discord${discordPathSuffix}/resources/app.asar/package.json
 
         cp -a --remove-destination $(readlink "$out/opt/Discord${discordPathSuffix}/.Discord${discordPathSuffix}-wrapped") "$out/opt/Discord${discordPathSuffix}/.Discord${discordPathSuffix}-wrapped"
