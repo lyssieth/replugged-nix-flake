@@ -19,10 +19,11 @@
     replugged-src = inputs.replugged;
     builder = import ./builder.nix;
     forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+    mkPnpmPackage = pnpm2nix.packages.x86_64-linux.mkPnpmPackage;
   in {
     lib = let
       self = {
-        makeDiscordPluggedPackageSet = builder-args: builder ({inherit replugged-src;} // builder-args);
+        makeDiscordPluggedPackageSet = builder-args: builder ({inherit replugged-src mkPnpmPackage;} // builder-args);
         makeDiscordPlugged = args: (self.makeDiscordPluggedPackageSet args).discord-plugged;
       };
     in
@@ -38,7 +39,6 @@
           inherit system;
           config.allowUnfree = true;
         };
-        mkPnpmPackage = pnpm2nix.packages.x86_64-linux.mkPnpmPackage;
       in
         builder {inherit pkgs replugged-src mkPnpmPackage;}
     );
