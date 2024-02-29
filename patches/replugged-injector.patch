@@ -1,0 +1,12 @@
+diff -ur a/scripts/inject/injector.mts b/scripts/inject/injector.mts
+--- a/scripts/inject/injector.mts       2024-02-29 12:19:27.260933265 +0200
++++ b/scripts/inject/injector.mts 2024-02-29 14:40:35.382495642 +0200
+@@ -143,7 +143,7 @@
+   }
+ 
+   if (prod) {
+-    await copyFile(join(dirname, "..", "..", "replugged.asar"), entryPoint);
++    await copyFile(join(dirname, "..", "..", "replugged.asar"), join(process.env.NIX_EXPECTED_ASAR, "replugged.asar"));
+     if (["linux", "darwin"].includes(process.platform)) {
+       try {
+         // Adjust ownership of config folder and asar file to match the parent config folder
