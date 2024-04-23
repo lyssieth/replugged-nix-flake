@@ -15,32 +15,26 @@
     flake-utils,
     pnpm2nix,
     ...
-  } @ inputs: let
-    replugged-src = inputs.replugged;
-    builder = import ./builder.nix;
-    forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
-    mkPnpmPackage = pnpm2nix.packages.x86_64-linux.mkPnpmPackage;
-  in {
-    lib = let
-      self = {
-        makeDiscordPluggedPackageSet = builder-args: builder ({inherit replugged-src mkPnpmPackage;} // builder-args);
-        makeDiscordPlugged = args: (self.makeDiscordPluggedPackageSet args).discord-plugged;
-      };
-    in
-      self;
-    overlays.default = final: prev: (builder {
-      inherit replugged-src;
-      pkgs = final;
-      overlayFinal = final;
-    });
-    packages = forAllSystems (
-      system: let
+  } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system: let
+      replugged-src = inputs.replugged;
+      builder = import ./builder.nix;
+      mkPnpmPackage = pnpm2nix.packages."${system}".mkPnpmPackage;
+    in {
+      lib = let
+        self = {
+          makeDiscordPluggedPackageSet = builder-args: builder ({inherit replugged-src mkPnpmPackage;} // builder-args);
+          makeDiscordPlugged = args: (self.makeDiscordPluggedPackageSet args).discord-plugged;
+        };
+      in
+        self;
+
+      packages = let
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
       in
-        builder {inherit pkgs replugged-src mkPnpmPackage;}
-    );
-  };
+        builder {inherit pkgs replugged-src mkPnpmPackage;};
+    });
 }

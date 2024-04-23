@@ -2,8 +2,6 @@
   lib,
   replugged-unwrapped,
   stdenvNoCC,
-  withPlugins ? {},
-  withThemes ? {},
 }: let
   unwrapped = replugged-unwrapped;
 in
@@ -25,14 +23,9 @@ in
             cp -a ${e.outPath} $out/${n}/${e.name}
             chmod -R u+w $out/${n}/${e.name}''
         );
-
-      mappedPlugins = map "plugins" (fromDrvs withPlugins);
-      mappedThemes = map "themes" (fromDrvs withThemes);
     in ''
       cp -a $src $out
       chmod 755 $out
-      ${mappedPlugins}
-      ${mappedThemes}
     '';
 
     passthru.unwrapped = unwrapped;
