@@ -6,20 +6,15 @@
 (mkPnpmPackage {
   name = "replugged-unwrapped";
   src = replugged-src;
-  script = "bundle --production";
+  script = "bundle --production --entryPoint=$src";
   distDir = "dist-bundle";
   installInPlace = true;
 
-  patches = [
-    ./patches/replugged-injector.patch
-  ];
-
-  buildPhase = ''
-    export NIX_EXPECTED_ASAR=$src
-    runHook preBuild
-    pnpm run bundle --production
-    runHook postBuild
-  '';
+  #buildPhase = ''
+  #  runHook preBuild
+  #  pnpm run bundle --production --entryPoint=$src
+  #  runHook postBuild
+  #'';
 
   postInstall = ''
     cp /build/source/replugged.asar $out/
