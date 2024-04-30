@@ -8,13 +8,13 @@
   src = replugged-src;
   script = "bundle --production --entryPoint=$src";
   distDir = "dist-bundle";
-  installInPlace = true;
+  installInPlace = false;
 
-  #buildPhase = ''
-  #  runHook preBuild
-  #  pnpm run bundle --production --entryPoint=$src
-  #  runHook postBuild
-  #'';
+  buildPhase = ''
+    runHook preBuild
+    pnpm run bundle --production --entryPoint=$src
+    runHook postBuild
+  '';
 
   postInstall = ''
     cp /build/source/replugged.asar $out/
