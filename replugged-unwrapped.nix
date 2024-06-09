@@ -9,15 +9,12 @@
   src = replugged-src;
   script = "bundle --production --entryPoint=$src";
   distDir = "dist-bundle";
-  installInPlace = false;
+  installInPlace = true;
 
   pnpm = pkgs.pnpm;
-
-  buildPhase = ''
-    runHook preBuild
-    pnpm run bundle --production --entryPoint=$src
-    runHook postBuild
-  '';
+  installEnv = {
+    "COREPACK_ENABLE_STRICT" = "0";
+  };
 
   postInstall = ''
     cp /build/source/replugged.asar $out/

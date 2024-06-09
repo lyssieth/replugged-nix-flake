@@ -7,7 +7,8 @@
     replugged.flake = false;
     flake-utils.url = "github:numtide/flake-utils";
     pnpm2nix = {
-      url = "github:nzbr/pnpm2nix-nzbr";
+      url = "github:wrvsrx/pnpm2nix-nzbr/adapt-to-v9"; # until https://github.com/nzbr/pnpm2nix-nzbr/pull/40 is merged
+      #url = "github:nzbr/pnpm2nix-nzbr";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
