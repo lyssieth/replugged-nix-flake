@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    replugged.url = "github:replugged-org/replugged/2f9d716eb215f558349abe11d02c310988831ae3";
+    replugged.url = "github:replugged-org/replugged/d1e4b4da2c8432cc35c195b5418ce038db824526";
     replugged.flake = false;
     flake-utils.url = "github:numtide/flake-utils";
     pnpm2nix = {

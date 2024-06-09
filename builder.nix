@@ -9,7 +9,7 @@
   selfOverlay = self;
   self = {
     replugged-unwrapped = pkgs.callPackage ./replugged-unwrapped.nix {
-      inherit replugged-src mkPnpmPackage;
+      inherit replugged-src mkPnpmPackage pkgs;
     };
 
     replugged = pkgs.callPackage ./replugged.nix {

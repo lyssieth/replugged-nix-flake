@@ -2,6 +2,7 @@
   lib,
   mkPnpmPackage,
   replugged-src,
+  pkgs,
 }:
 (mkPnpmPackage {
   name = "replugged-unwrapped";
@@ -9,6 +10,8 @@
   script = "bundle --production --entryPoint=$src";
   distDir = "dist-bundle";
   installInPlace = false;
+
+  pnpm = pkgs.pnpm;
 
   buildPhase = ''
     runHook preBuild
