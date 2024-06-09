@@ -60,17 +60,16 @@
     "replugged": {
       "flake": false,
       "locked": {
-        "lastModified": 1713916959,
-        "narHash": "sha256-lNGdrURddJ4DVG43eUouIMT85zzVpzcij8ER5Pl2RDg=",
+        "lastModified": 1717399512,
+        "narHash": "sha256-MwVKV02A8gST22rjtfTA7cqdHpYt/ssr1ROKpxPCZBc=",
         "owner": "replugged-org",
         "repo": "replugged",
-        "rev": "d1e4b4da2c8432cc35c195b5418ce038db824526",
+        "rev": "a5ed6f2e38a078efb1ea0ae7f032f05d04be9f17",
         "type": "github"
       },
       "original": {
         "owner": "replugged-org",
         "repo": "replugged",
-        "rev": "d1e4b4da2c8432cc35c195b5418ce038db824526",
         "type": "github"
       }
     },
