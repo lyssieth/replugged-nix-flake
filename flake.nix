@@ -3,8 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    replugged.url = "github:replugged-org/replugged";
-    replugged.flake = false;
+
+    replugged = {
+      url = "github:replugged-org/replugged";
+      flake = false;
+    };
     flake-utils.url = "github:numtide/flake-utils";
     pnpm2nix = {
       url = "github:wrvsrx/pnpm2nix-nzbr/adapt-to-v9"; # until https://github.com/nzbr/pnpm2nix-nzbr/pull/40 is merged
