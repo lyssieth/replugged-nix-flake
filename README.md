@@ -4,6 +4,14 @@ This is a Nix flake that allows installing a [Replugged](https://github.com/repl
 
 It's based on the work of [LunNova/replugged-nix-flake](https://github.com/LunNova/replugged-nix-flake), but working with the current (as of 03-2024) iteration of Replugged.
 
+## -- NOTE --
+
+Currently, the version of [`pnpm2nix`](https://github.com/wrvsrx/pnpm2nix-nzbr/tree/adapt-to-v9) used by default in this repo doesn't function.
+
+I believe that combining that version with [this version by aumetra](https://github.com/aumetra/pnpm2nix-nzbr) would theoretically fix it.
+
+However, I haven't had a chance to do so.
+
 ## Updates
 
 I'll keep this updated as I need it, but if you want an update either submit an Issue or a PR.
