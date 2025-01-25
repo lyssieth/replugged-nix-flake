@@ -7,9 +7,15 @@
 (mkPnpmPackage {
   name = "replugged-unwrapped";
   src = replugged-src;
-  script = "bundle --production --entryPoint=$src";
+  script = "bundle --production --entryPoint=$build";
   distDir = "dist-bundle";
   installInPlace = true;
+
+  nativeBuildInputs = [
+    pkgs.cacert
+    pkgs.pnpm
+    pkgs.nodejs_22
+  ];
 
   pnpm = pkgs.pnpm;
   installEnv = {
@@ -17,7 +23,7 @@
   };
 
   postInstall = ''
-    cp /build/source/replugged.asar $out/
+    cp replugged.asar $out/ || exit 1
   '';
 
   meta = {

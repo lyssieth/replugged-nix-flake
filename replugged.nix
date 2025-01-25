@@ -9,21 +9,7 @@ in
     name = "replugged";
     src = unwrapped.out;
 
-    installPhase = let
-      fromDrvs = lib.mapAttrsToList (k: drv: {
-        inherit (drv) outPath;
-        name = lib.strings.sanitizeDerivationName k;
-      });
-
-      map = n:
-        lib.concatMapStringsSep "\n"
-        (
-          e: ''
-            chmod 755 $out/${n}
-            cp -a ${e.outPath} $out/${n}/${e.name}
-            chmod -R u+w $out/${n}/${e.name}''
-        );
-    in ''
+    installPhase = ''
       cp -a $src $out
       chmod 755 $out
     '';
